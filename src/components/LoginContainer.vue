@@ -62,7 +62,7 @@ import SocialLogin from './SocialLogin.vue'
     align-items: center;
     gap: 10px;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 16px;
     & .checkbox-color {
       filter: hue-rotate(143deg);
     }
@@ -74,17 +74,18 @@ import SocialLogin from './SocialLogin.vue'
 
   .button {
     position: relative;
-    margin-top: 24px;
+    margin-top: 48px;
 
     & .btn {
-      width: 72px;
-      height: 72px;
+      width: 48px;
+      height: 48px;
       border-radius: 30%;
       color: #e8e8e8;
       background: #d13639;
       border: 0;
-      font-size: 32px;
+      font-size: 24px;
       cursor: pointer;
+      transition: 0.3s;
 
       &:hover {
         background: #bc252a;
@@ -101,6 +102,7 @@ import SocialLogin from './SocialLogin.vue'
       color: #b6b6b6;
       margin-bottom: 10px;
       cursor: pointer;
+      transition: 0.3s;
       &:hover {
         color: #111;
       }

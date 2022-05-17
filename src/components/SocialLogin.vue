@@ -21,16 +21,16 @@
   display: flex;
   width: 100%;
   gap: 10px;
+  height: 32px;
   & div {
     width: 33.3% !important;
-    height: 3em;
     border: 2px solid rgba(0, 0, 0, 0.05);
     border-radius: 4px;
-    margin: 10px 0;
-    line-height: 3em;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     & i {
-      font-size: 26px;
+      font-size: 18px;
     }
   }
 
@@ -38,12 +38,14 @@
     color: #fff;
     background-color: #1877f2;
     cursor: pointer;
+    transition: 0.3s;
     &:hover {
       background-color: #0966de;
     }
   }
   & .google {
     cursor: pointer;
+    transition: 0.3s;
     &:hover {
       background-color: #f7f7f7;
     }
@@ -54,12 +56,13 @@
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
+    transition: 0.3s;
   }
 
   & .apple {
     color: #fff;
     background-color: #000;
-
+    transition: 0.3s;
     &:hover {
       cursor: pointer;
     }
