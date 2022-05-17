@@ -1,6 +1,20 @@
-<script setup>
+<script>
 import RiotInput from '../components/Input.vue'
 import SocialLogin from './SocialLogin.vue'
+import Loading from './Loading.vue'
+
+export default {
+  components: {
+    RiotInput,
+    SocialLogin,
+    Loading,
+  },
+  data() {
+    return {
+      loading: false,
+    }
+  },
+}
 </script>
 
 <template>
@@ -9,21 +23,25 @@ import SocialLogin from './SocialLogin.vue'
       <img src="../assets/riot-games.png" alt="Riot Games Logo" />
     </div>
 
-    <h1>Fazer login</h1>
+    <form v-if="!loading">
+      <h1>Fazer login</h1>
 
-    <riot-input name="login" label="NOME DE USUÁRIO" type="text" />
-    <riot-input name="password" label="SENHA" type="password" />
+      <riot-input name="login" label="NOME DE USUÁRIO" type="text" />
+      <riot-input name="password" label="SENHA" type="password" />
 
-    <social-login />
+      <social-login />
 
-    <div class="checkbox">
-      <input type="checkbox" class="checkbox-color" id="check" name="check" value="stay" />
-      <label for="check">Manter login</label>
-    </div>
+      <div class="checkbox">
+        <input type="checkbox" class="checkbox-color" id="check" name="check" value="stay" />
+        <label for="check">Manter login</label>
+      </div>
 
-    <div class="button">
-      <button type="submit" class="btn"><i class="fas fa-arrow-right"></i></button>
-    </div>
+      <div class="button">
+        <button type="submit" class="btn"><i class="fas fa-arrow-right"></i></button>
+      </div>
+    </form>
+
+    <Loading v-else />
 
     <div class="footer-links">
       <h6>NÃO CONSEGUE INICIAR SESSÃO?</h6>
@@ -39,9 +57,18 @@ import SocialLogin from './SocialLogin.vue'
   height: 100%;
   background: #f9f9f9;
   padding: 50px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 5fr 1fr;
   align-items: center;
+  justify-items: center;
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
 
   & .logo-riot {
     width: 150px;
