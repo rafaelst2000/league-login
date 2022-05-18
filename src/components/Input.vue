@@ -13,12 +13,16 @@ export default {
       type: String,
       default: '',
     },
+    error: {
+      type: Boolean,
+      default: false,
+    },
   },
 }
 </script>
 
 <template>
-  <div class="input-container input-value">
+  <div class="input-container input-value" :class="error ? 'error' : ''">
     <input :type="type" :name="name" required />
     <label :for="name">{{ label }}</label>
   </div>
@@ -89,6 +93,15 @@ input:valid + label {
   animation-direction: normal;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.error {
+  background: #f2e2f4;
+  border-color: #eabfef;
+
+  & label {
+    color: #d06cda;
+  }
 }
 
 @keyframes label-in {
