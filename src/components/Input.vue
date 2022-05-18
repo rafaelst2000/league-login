@@ -1,9 +1,20 @@
-<script setup>
-defineProps({
-  name: String,
-  label: String,
-  type: String,
-})
+<script>
+export default {
+  props: {
+    name: {
+      type: String,
+      default: '',
+    },
+    label: {
+      type: String,
+      default: '',
+    },
+    type: {
+      type: String,
+      default: '',
+    },
+  },
+}
 </script>
 
 <template>
@@ -22,12 +33,6 @@ defineProps({
   margin-bottom: 16px;
   border-radius: 4px;
 }
-
-/* .input-value {
-  float: right;
-  box-sizing: border-box;
-  display: inline-block;
-} */
 
 .input-value label,
 .input-value input {

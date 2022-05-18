@@ -1,12 +1,19 @@
-<script setup>
+<script>
 import LoginImageContainer from '../components/LoginImageContainer.vue'
 import LoginContainer from '../components/LoginContainer.vue'
+
+export default {
+  components: {
+    LoginImageContainer,
+    LoginContainer,
+  },
+}
 </script>
 
 <template>
   <div class="home-container">
-    <LoginContainer />
-    <LoginImageContainer />
+    <login-container />
+    <login-image-container />
   </div>
 </template>
 
