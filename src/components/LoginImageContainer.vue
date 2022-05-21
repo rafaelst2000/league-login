@@ -1,11 +1,11 @@
 <script>
 import GameAlert from './GameAlert.vue'
-import UserButton from './UserButton.vue'
+import OutlinedButton from './OutlinedButton.vue'
 
 export default {
   components: {
     GameAlert,
-    UserButton,
+    OutlinedButton,
   },
 }
 </script>
@@ -13,7 +13,7 @@ export default {
 <template>
   <div class="login-image-container">
     <game-alert />
-    <user-button />
+    <outlined-button icon="fas fa-user" />
   </div>
 </template>
 

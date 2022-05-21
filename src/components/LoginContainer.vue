@@ -36,7 +36,7 @@ export default {
         <label for="check">Manter login</label>
       </div>
 
-      <div class="button">
+      <div class="button" @click="$router.push({ path: '/logged' })">
         <button type="submit" class="btn"><i class="fas fa-arrow-right"></i></button>
       </div>
     </form>

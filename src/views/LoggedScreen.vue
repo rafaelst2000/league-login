@@ -1,69 +1,100 @@
 <script>
 import GameAlert from '../components/GameAlert.vue'
-import UserButton from '../components/UserButton.vue'
-import MenuButton from '../components/MenuButton.vue'
+import OutlinedButton from '../components/OutlinedButton.vue'
 export default {
   components: {
     GameAlert,
-    UserButton,
-    MenuButton,
+    OutlinedButton,
+  },
+  data: () => ({
+    isVideo: false,
+  }),
+  computed: {
+    cameraIcon() {
+      return this.isVideo ? 'fas fa-video' : 'fas fa-video-slash'
+    },
   },
 }
 </script>
 
 <template>
-  <div class="logged-container">
-    <header>
-      <div class="left-icons">
-        <menu-button />
-        <game-alert />
-      </div>
-      <img src="../assets/league-of-legends.png" alt="" />
-      <user-button />
-    </header>
-
-    <footer>
-      <div class="play-button-container">
-        <div class="play-button">
-          <div class="play-circle"><i class="fas fa-play"></i></div>
-          <h1>Jogar</h1>
+  <div class="logged-container-outside">
+    <video autoplay muted loop id="myVideo" v-if="isVideo">
+      <source src="../assets/valiant-riven.mp4" type="video/mp4" />
+    </video>
+    <div class="logged-container" :class="{ 'background-image': !isVideo }">
+      <header>
+        <div class="left-icons">
+          <outlined-button icon="fas fa-border-all" />
+          <game-alert />
         </div>
-
-        <div class="button-dropdown">
-          <i class="fa-solid fa-caret-down"></i>
-        </div>
-      </div>
-
-      <div class="footer-cards">
-        <div class="card card-1">
-          <div>
-            <h6>DEV</h6>
+        <img src="../assets/league-of-legends.png" alt="" />
+        <outlined-button icon="fas fa-user" />
+      </header>
+      <footer :class="isVideo ? 'footer-video' : 'footer-image'">
+        <outlined-button class="icon-camera" :icon="cameraIcon" @click="isVideo = !isVideo" />
+        <div class="play-button-container">
+          <div class="play-button">
+            <div class="play-circle"><i class="fas fa-play"></i></div>
+            <h1>Jogar</h1>
           </div>
-          <h5>
-            Mapa dos Campeões - Abril <br />
-            de 2022
-          </h5>
-        </div>
-        <div class="card card-2">
-          <div>
-            <h6>ATUALIZAÇÃO DO JOGO</h6>
+
+          <div class="button-dropdown">
+            <i class="fa-solid fa-caret-down"></i>
           </div>
-          <h5>Notas da Atualização 12.9</h5>
         </div>
-      </div>
-    </footer>
+
+        <div class="footer-cards">
+          <div class="card card-1">
+            <div>
+              <h6>DEV</h6>
+            </div>
+            <h5>
+              Mapa dos Campeões - Abril <br />
+              de 2022
+            </h5>
+          </div>
+          <div class="card card-2">
+            <div>
+              <h6>ATUALIZAÇÃO DO JOGO</h6>
+            </div>
+            <h5>Notas da Atualização 12.9</h5>
+          </div>
+        </div>
+      </footer>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.logged-container {
+#myVideo {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 1280px;
+  height: 680px;
+  object-fit: cover;
+  animation: fadeIn 1.5s;
+}
+
+.logged-container-outside {
   position: relative;
   width: 1280px;
   height: 680px;
-  background-image: url('../assets/katarina.jpg');
+}
+
+.background-image {
+  background-image: url('../assets/valiant-riven.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  animation: fadeIn 1.5s;
+}
+
+.logged-container {
+  position: absolute;
+  width: 1280px;
+  height: 680px;
 
   & header {
     height: 100px;
@@ -83,16 +114,28 @@ export default {
     }
   }
 
+  .footer-video {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .footer-image {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
   & footer {
     height: 120px;
     width: 100%;
     padding: 20px 80px;
-    background: rgba(0, 0, 0, 0.5);
     position: absolute;
     bottom: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  & .icon-camera {
+    position: absolute;
+    bottom: 140px;
+    left: 20px;
   }
 
   & .play-button-container {
@@ -106,6 +149,7 @@ export default {
     &:hover {
       .play-circle {
         transform: scale(1.1);
+        font-size: 22px;
       }
     }
   }
@@ -165,6 +209,12 @@ export default {
   }
 
   & .footer-cards {
+    margin-bottom: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 20px;
     & h6 {
       color: #1e1a24;
       background: rgba(#f9f9f9, 0.5);
@@ -200,9 +250,18 @@ export default {
       width: 230px;
     }
     & .card-2 {
-      background-image: url('../assets/mapa-campeoes.jpg');
+      background-image: url('../assets/notas-atualizacao.jpg');
       width: 320px;
     }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 </style>

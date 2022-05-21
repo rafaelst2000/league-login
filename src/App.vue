@@ -28,6 +28,8 @@ body {
   justify-content: center;
   align-items: center;
   background: url('./assets/background.jpg');
-  background-size: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 </style>
