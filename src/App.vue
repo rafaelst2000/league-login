@@ -1,4 +1,23 @@
-<script></script>
+<script>
+import { useAuthStore } from './stores/auth'
+import { mapActions } from 'pinia'
+import { onAuthStateChanged, getAuth } from 'firebase/auth'
+
+export default {
+  methods: {
+    ...mapActions(useAuthStore, ['setUser']),
+  },
+  mounted() {
+    const auth = getAuth()
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.setUser({ ...user, isAuth: true })
+        this.$router.push('/logged')
+      }
+    })
+  },
+}
+</script>
 
 <template>
   <router-view />

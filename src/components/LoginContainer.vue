@@ -1,4 +1,8 @@
 <script>
+import { useAuthStore } from '../stores/auth'
+import { mapActions } from 'pinia'
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+
 import RiotInput from '../components/Input.vue'
 import SocialLogin from './SocialLogin.vue'
 import Loading from './Loading.vue'
@@ -25,11 +29,27 @@ export default {
     },
   },
   methods: {
+    ...mapActions(useAuthStore, ['setUser']),
     login() {
       if (this.disableButton) return
       this.error = true
       if (this.error) return
       this.$router.push({ path: '/logged' })
+    },
+    loginGoogle() {
+      this.loading = true
+      const auth = getAuth()
+      const provider = new GoogleAuthProvider()
+      signInWithPopup(auth, provider)
+        .then((data) => {
+          this.setUser({ ...data.user, isAuth: true })
+          this.loading = false
+          this.$router.push('/logged')
+        })
+        .catch((error) => console.log(error))
+    },
+    socialLogin(socialNetwork) {
+      if (socialNetwork === 'google') this.loginGoogle()
     },
   },
   watch: {
@@ -56,7 +76,7 @@ export default {
       <riot-input v-model="user" name="login" label="NOME DE USUÁRIO" type="text" :error="error" />
       <riot-input v-model="password" name="password" label="SENHA" type="password" :error="error" />
 
-      <social-login />
+      <social-login @click="socialLogin($event)" />
 
       <div class="checkbox">
         <input type="checkbox" class="checkbox-color" id="check" name="check" value="stay" />

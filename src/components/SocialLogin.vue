@@ -1,4 +1,8 @@
-<script setup></script>
+<script>
+export default {
+  emits: ['click'],
+}
+</script>
 
 <template>
   <div class="social-login">
@@ -6,7 +10,7 @@
       <i class="fab fa-facebook"></i>
     </div>
 
-    <div class="google">
+    <div class="google" @click="$emit('click', 'google')">
       <i class="fab fa-google"></i>
     </div>
 

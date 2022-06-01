@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
-import { storeToRefs } from 'pinia'
 
 import Home from '../views/Home.vue'
 import LoggedScreen from '../views/LoggedScreen.vue'
@@ -28,7 +27,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const store = useAuthStore()
-  const { getUser, teste } = store
+  const { getUser } = store
 
   if(to.meta.needsAuth && !getUser.isAuth) next('/')
   else next()
