@@ -2,16 +2,19 @@
 import RiotInput from '../components/Input.vue'
 import SocialLogin from './SocialLogin.vue'
 import Loading from './Loading.vue'
+import LoginCredentialError from './LoginCredentialError.vue'
 
 export default {
   components: {
     RiotInput,
     SocialLogin,
     Loading,
+    LoginCredentialError,
   },
   data() {
     return {
       loading: false,
+      error: false,
       user: '',
       password: '',
     }
@@ -24,7 +27,17 @@ export default {
   methods: {
     login() {
       if (this.disableButton) return
+      this.error = true
+      if (this.error) return
       this.$router.push({ path: '/logged' })
+    },
+  },
+  watch: {
+    user() {
+      this.error = false
+    },
+    password() {
+      this.error = false
     },
   },
 }
@@ -37,10 +50,11 @@ export default {
     </div>
 
     <form v-if="!loading">
-      <h1>Fazer login</h1>
+      <h1 v-if="!error">Fazer login</h1>
+      <login-credential-error v-else />
 
-      <riot-input v-model="user" name="login" label="NOME DE USUÁRIO" type="text" />
-      <riot-input v-model="password" name="password" label="SENHA" type="password" />
+      <riot-input v-model="user" name="login" label="NOME DE USUÁRIO" type="text" :error="error" />
+      <riot-input v-model="password" name="password" label="SENHA" type="password" :error="error" />
 
       <social-login />
 
@@ -48,7 +62,7 @@ export default {
         <input type="checkbox" class="checkbox-color" id="check" name="check" value="stay" />
         <label for="check">Manter login</label>
       </div>
-      <div class="button" @click="login">
+      <div class="button" @click.prevent="login">
         <button type="submit" class="btn" :class="disableButton ? 'btn-disabled' : ''"><i class="fas fa-arrow-right"></i></button>
       </div>
     </form>
