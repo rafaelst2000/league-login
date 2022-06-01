@@ -14,6 +14,7 @@
   margin-bottom: 6px;
   & p {
     color: #d06cda;
+    font-weight: bold;
     font-size: 12px;
     text-align: center;
   }
