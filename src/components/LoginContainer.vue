@@ -21,6 +21,12 @@ export default {
       return !this.user || !this.password
     },
   },
+  methods: {
+    login() {
+      if (this.disableButton) return
+      this.$router.push({ path: '/logged' })
+    },
+  },
 }
 </script>
 
@@ -42,7 +48,7 @@ export default {
         <input type="checkbox" class="checkbox-color" id="check" name="check" value="stay" />
         <label for="check">Manter login</label>
       </div>
-      <div class="button" @click="$router.push({ path: '/logged' })">
+      <div class="button" @click="login">
         <button type="submit" class="btn" :class="disableButton ? 'btn-disabled' : ''"><i class="fas fa-arrow-right"></i></button>
       </div>
     </form>
