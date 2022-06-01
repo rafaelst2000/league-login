@@ -20,7 +20,7 @@ export default {
 <style scoped>
 .home-container {
   display: grid;
-  grid-template-columns: 400px 1fr;
+  grid-template-columns: 370px 1fr;
   width: 1280px;
   height: 680px;
 }
