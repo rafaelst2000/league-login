@@ -12,7 +12,14 @@ export default {
   data() {
     return {
       loading: false,
+      user: '',
+      password: '',
     }
+  },
+  computed: {
+    disableButton() {
+      return !this.user || !this.password
+    },
   },
 }
 </script>
@@ -26,8 +33,8 @@ export default {
     <form v-if="!loading">
       <h1>Fazer login</h1>
 
-      <riot-input name="login" label="NOME DE USUÁRIO" type="text" />
-      <riot-input name="password" label="SENHA" type="password" />
+      <riot-input v-model="user" name="login" label="NOME DE USUÁRIO" type="text" />
+      <riot-input v-model="password" name="password" label="SENHA" type="password" />
 
       <social-login />
 
@@ -35,9 +42,8 @@ export default {
         <input type="checkbox" class="checkbox-color" id="check" name="check" value="stay" />
         <label for="check">Manter login</label>
       </div>
-
       <div class="button" @click="$router.push({ path: '/logged' })">
-        <button type="submit" class="btn"><i class="fas fa-arrow-right"></i></button>
+        <button type="submit" class="btn" :class="disableButton ? 'btn-disabled' : ''"><i class="fas fa-arrow-right"></i></button>
       </div>
     </form>
 
@@ -116,6 +122,16 @@ export default {
 
       &:hover {
         background: #bc252a;
+      }
+    }
+    & .btn-disabled {
+      cursor: not-allowed;
+      color: rgba(126, 126, 126, 0.1);
+      background: transparent;
+      border: 2px solid rgba(126, 126, 126, 0.1);
+
+      &:hover {
+        background: transparent;
       }
     }
   }

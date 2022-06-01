@@ -1,5 +1,6 @@
 <script>
 export default {
+  emits: ['update:modelValue'],
   props: {
     name: {
       type: String,
@@ -17,13 +18,24 @@ export default {
       type: Boolean,
       default: false,
     },
+    modelValue: String,
+  },
+  computed: {
+    localValue: {
+      get() {
+        return this.modelValue
+      },
+      set(value) {
+        this.$emit('update:modelValue', value)
+      },
+    },
   },
 }
 </script>
 
 <template>
   <div class="input-container input-value" :class="error ? 'error' : ''">
-    <input :type="type" :name="name" required />
+    <input v-model="localValue" :type="type" :name="name" required />
     <label :for="name">{{ label }}</label>
   </div>
 </template>
