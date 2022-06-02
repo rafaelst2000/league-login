@@ -1,7 +1,38 @@
-# Vue 3 + Vite
+<div align="center">
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+![Node_Badge][node_version_badge] ![Npm_Badge][yarn_version_badge] ![vue_Badge][vue_badge] ![NodeJS_Badge][server_firebase_badge] ![Pinia_Badge][pinia_badge]
 
-## Recommended IDE Setup
+</div>
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+
+## **:rocket: Objetivo**
+
+O projeto tem como finalidade colocar em prática os aprendizados dos cursos de Firebase da **Vue School**. Consiste em um clone da tela de Login do League of Legends, fazendo a autenticação do usuário.
+
+## **:computer: Tecnologias**
+
+  - **VueJS 3 - Framework Javacript**
+  - **Vue Router 4 - Roteamento para VueJS**
+  - **Pinia - Gerenciamento de estado global**
+  - **Firebase - Autenticação e banco de dados em tempo real**
+
+### **Executando o Projeto**
+
+```
+git clone https://github.com/rafaelst2000/league-login.git
+cd league-login
+yarn
+yarn dev
+```
+
+<!-- Badges -->
+
+[node_version_badge]: https://img.shields.io/badge/Node-12.20.0-green
+
+[yarn_version_badge]: https://img.shields.io/badge/Yarn-1.22.17-red
+
+[vue_badge]: https://img.shields.io/badge/Web-VueJS-green
+
+[server_firebase_badge]: https://img.shields.io/badge/Server-Firebase-important
+
+[pinia_badge]: https://img.shields.io/badge/Store-Pinia-yellow
