@@ -11,7 +11,7 @@ O projeto tem como finalidade colocar em prática os aprendizados dos cursos de 
 
 ## **:computer: Tecnologias**
 
-  - **VueJS 3 - Framework Javacript**
+  - **VueJS 3 - Framework Javascript**
   - **Vue Router 4 - Roteamento para VueJS**
   - **Pinia - Gerenciamento de estado global**
   - **Firebase - Autenticação e banco de dados em tempo real**
