@@ -17,7 +17,7 @@ O projeto tem como finalidade colocar em prática os aprendizados dos cursos de 
   - **Firebase - Autenticação e banco de dados em tempo real**
   - **Vite - Bundler e Dev-server**
 
-### **Executando o Projeto**
+### **⚡Executando o Projeto**
 
 ```
 git clone https://github.com/rafaelst2000/league-login.git
