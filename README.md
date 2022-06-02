@@ -1,6 +1,6 @@
 <div align="center">
 
-![Node_Badge][node_version_badge] ![Npm_Badge][yarn_version_badge] ![vue_Badge][vue_badge] ![NodeJS_Badge][server_firebase_badge] ![Pinia_Badge][pinia_badge]
+![Node_Badge][node_version_badge] ![Npm_Badge][yarn_version_badge] ![vue_Badge][vue_badge] ![NodeJS_Badge][server_firebase_badge] ![Pinia_Badge][pinia_badge] ![Vite_Badge][vite_badge]
 
 </div>
 
@@ -15,6 +15,7 @@ O projeto tem como finalidade colocar em prática os aprendizados dos cursos de 
   - **Vue Router 4 - Roteamento para VueJS**
   - **Pinia - Gerenciamento de estado global**
   - **Firebase - Autenticação e banco de dados em tempo real**
+  - **Vite - Bundler e Dev-server**
 
 ### **Executando o Projeto**
 
@@ -36,3 +37,5 @@ yarn dev
 [server_firebase_badge]: https://img.shields.io/badge/Server-Firebase-important
 
 [pinia_badge]: https://img.shields.io/badge/Store-Pinia-yellow
+
+[vite_badge]: https://img.shields.io/badge/Bundle-Vite-purple
