@@ -17,6 +17,7 @@ O projeto tem como finalidade colocar em prática os aprendizados dos cursos de 
   - **Firebase - Autenticação e banco de dados em tempo real**
   - **Vite - Bundler e Dev-server**
 
+
 ### **⚡Executando o Projeto**
 
 ### Pré-requisitos
@@ -36,7 +37,7 @@ Siga as etapas seguintes para instalar e executar o projeto:
    ```sh
    git clone https://github.com/rafaelst2000/league-login.git
    ```
-2. Instale as dependências do projeto
+2. Instale as dependências do projeto:
 
    ```sh
    yarn
@@ -56,7 +57,7 @@ Siga as etapas seguintes para instalar e executar o projeto:
    <br>
  
  <div align="center">
-  Feito com ♥ by <a href="https://www.linkedin.com/in/rafaelst2000/" target="_blank">Rafael Trevisan</a>
+  Made with 💚 by <a href="https://www.linkedin.com/in/rafaelst2000/" target="_blank">Rafael Trevisan</a>
  </div>
 
 <!-- Badges -->
