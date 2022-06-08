@@ -6,14 +6,14 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import RiotInput from '../components/Input.vue'
 import SocialLogin from './SocialLogin.vue'
 import Loading from './Loading.vue'
-import LoginCredentialError from './LoginCredentialError.vue'
+import ErrorMessage from './ErrorMessage.vue'
 
 export default {
   components: {
     RiotInput,
     SocialLogin,
     Loading,
-    LoginCredentialError,
+    ErrorMessage,
   },
   data() {
     return {
@@ -71,7 +71,7 @@ export default {
 
     <form v-if="!loading">
       <h1 v-if="!error">Fazer login</h1>
-      <login-credential-error v-else />
+      <error-message v-else text="Suas credenciais de login não coincidem com uma conta em nosso sistema."/>
 
       <riot-input v-model="user" name="login" label="NOME DE USUÁRIO" type="text" :error="error" />
       <riot-input v-model="password" name="password" label="SENHA" type="password" :error="error" />

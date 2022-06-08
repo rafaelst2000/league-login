@@ -1,8 +1,18 @@
-<script></script>
+<script>
+export default {
+  name: 'ErrorMessage',
+  props: {
+    text: {
+      type: String,
+      default: ''
+    }
+  }
+}
+</script>
 
 <template>
   <div class="login-credential-error-container">
-    <p>Suas credenciais de login não coincidem com uma conta em nosso sistema.</p>
+    <p>{{ text }}</p>
   </div>
 </template>
 
