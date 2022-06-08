@@ -1,6 +1,6 @@
 <script>
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-import { getDatabase, ref, child, push, update } from "firebase/database";
+import { getDatabase, ref, update, get, child } from "firebase/database";
 
 import { useAuthStore } from '../stores/auth'
 import { mapState } from 'pinia'
@@ -20,52 +20,94 @@ export default {
   emits: ['social-login'],
   data() {
     return {
-      error: false,
       loading: false,
-      user: '',
-      name: '',
-      email: '',
-      password: '',
+      newUser: {
+        user: '',
+        name: '',
+        email: '',
+        password: '',
+      },
+      errorMessage: '',
+      allUsers: []
     }
   },
   computed: {
     ...mapState(useAuthStore, ['getUser']),
     disableButton() {
-      return !this.user || !this.name || !this.email || !this.password
-    }
+      return !this.newUser.user || !this.newUser.name || !this.newUser.email || !this.newUser.password
+    },
   },
   methods: {
-    createAccount(){
+    async createAccount(){
+      const isValid = await this.validateInfos()
+      if(!isValid) return
+
       const auth = getAuth()
       this.loading = true
-      createUserWithEmailAndPassword(auth, this.email, this.password)
+      createUserWithEmailAndPassword(auth, this.newUser.email, this.newUser.password)
         .then((newUser) => {
           const db = getDatabase() 
           const { uid } = newUser.user
           const updateData = { 
-            username: this.user,
-            displayName: this.name,
+            username: this.newUser.user,
+            displayName: this.newUser.name,
           }
           update(ref(db, `users/${uid}`), updateData)
         })
         .catch((error) => {
-
+          const { message } = error
+          if(message === 'Firebase: Error (auth/invalid-email).') this.errorMessage = 'Digite um e-mail válido.'
+          if(message === 'Firebase: Password should be at least 6 characters (auth/weak-password).') this.errorMessage = 'A senha deve possuir ao menos 6 dígitos'
+          if(message === 'Firebase: Error (auth/email-already-in-use).') this.errorMessage = 'E-mail já está em uso.'
         })
         .finally(() => this.loading = false)
     },
+    async validateInfos() {
+      const fullNameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/
+      const isFullName = fullNameRegex.test(this.newUser.name)
+      if(!isFullName) {
+        this.errorMessage = 'Digite seu nome completo.'
+        return false
+      }
+      if(this.allUsers.includes(this.newUser.user)){
+        this.errorMessage = 'Nome de usuário já está em uso.'
+        return false
+      }
+      return true
+    },
+    getAllUsernames() {
+      const db = getDatabase()
+      const dbRef = ref(db)
+      get(child(dbRef, 'users')).then((snapshot ) => {
+        if(snapshot.exists()) {
+          this.allUsers = Object.entries(snapshot.val()).map(user => user[1].username)
+        }
+      })
+    }
+  },
+  watch: {
+    newUser: {
+      deep: true,
+      handler() {
+        this.errorMessage = ''
+      }
+    }
+  },
+  mounted() {
+    this.getAllUsernames()
   }
 }
 </script>
 
 <template>
   <form v-if="!loading">
-    <h1 v-if="!error">Crie sua conta</h1>
-    <error-message v-else text="Suas credenciais de login não coincidem com uma conta em nosso sistema."/>
+    <h1 v-if="!errorMessage">Crie sua conta</h1>
+    <error-message v-else :text="errorMessage"/>
 
-    <riot-input v-model="user" name="login" label="NOME DE USUÁRIO" type="text" :error="error" />
-    <riot-input v-model="name" name="name" label="NOME COMPLETO" type="text" :error="error" />
-    <riot-input v-model="email" name="email" label="E-MAIL" type="text" :error="error" />
-    <riot-input v-model="password" name="password" label="SENHA" type="password" :error="error" />
+    <riot-input v-model="newUser.user" name="login" label="NOME DE USUÁRIO" type="text" :error="!!errorMessage" />
+    <riot-input v-model="newUser.name" name="name" label="NOME COMPLETO" type="text" :error="!!errorMessage" />
+    <riot-input v-model="newUser.email" name="email" label="E-MAIL" type="text" :error="!!errorMessage" />
+    <riot-input v-model="newUser.password" name="password" label="SENHA" type="password" :error="!!errorMessage" />
 
     <social-login @click="$emit('social-login', $event)" />
 
