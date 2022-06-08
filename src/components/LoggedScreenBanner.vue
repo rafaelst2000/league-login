@@ -2,6 +2,7 @@
 import GameAlert from './GameAlert.vue'
 import OutlinedButton from './OutlinedButton.vue'
 export default {
+  name: 'LoggedScreenBanner',
   components: {
     GameAlert,
     OutlinedButton,

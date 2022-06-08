@@ -3,6 +3,7 @@ import GameAlert from './GameAlert.vue'
 import OutlinedButton from './OutlinedButton.vue'
 
 export default {
+  name: 'LoginImageContainer',
   components: {
     GameAlert,
     OutlinedButton,

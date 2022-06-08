@@ -3,6 +3,7 @@ import LoggedScreenBanner from '../components/LoggedScreenBanner.vue'
 import LoggedScreenInfo from '../components/LoggedScreenInfo.vue'
 
 export default {
+  name: 'LoggedScreen',
   components: {
     LoggedScreenBanner,
     LoggedScreenInfo,

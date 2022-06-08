@@ -2,13 +2,14 @@
 import { useAuthStore } from '../stores/auth'
 import { mapActions } from 'pinia'
 
-import RiotInput from '../components/Input.vue'
+import RiotInput from '../components/RiotInput.vue'
 import SocialLogin from './SocialLogin.vue'
 import Loading from './Loading.vue'
 import ErrorMessage from './ErrorMessage.vue'
 import FormCreateAccount from './FormCreateAccount.vue'
 
 export default {
+  name: 'FormLogin',
   components: {
     RiotInput,
     SocialLogin,
@@ -16,20 +17,13 @@ export default {
     ErrorMessage,
     FormCreateAccount,
   },
-  emits: ['social-login', 'loading'],
-  props: {
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  data() {
-    return {
-      error: false,
-      user: '',
-      password: '',
-    }
-  },
+  emits: ['social-login'],
+  data: () => ({
+    error: false,
+    loading: false,
+    user: '',
+    password: '',
+  }),
   computed: {
     disableButton() {
       return !this.user || !this.password

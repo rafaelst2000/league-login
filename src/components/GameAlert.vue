@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: 'GameAlert',
   data: () => ({
     showTooltip: false,
   }),

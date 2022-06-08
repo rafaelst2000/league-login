@@ -3,7 +3,7 @@ import { useAuthStore } from '../stores/auth'
 import { mapActions } from 'pinia'
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 
-import RiotInput from '../components/Input.vue'
+import RiotInput from './RiotInput.vue'
 import SocialLogin from './SocialLogin.vue'
 import Loading from './Loading.vue'
 import ErrorMessage from './ErrorMessage.vue'
@@ -11,6 +11,7 @@ import FormCreateAccount from './FormCreateAccount.vue'
 import FormLogin from './FormLogin.vue'
 
 export default {
+  name: 'LoginContainer',
   components: {
     RiotInput,
     SocialLogin,

@@ -1,11 +1,6 @@
 <script>
-/* import LoggedScreenContainer from '../components/LoggedScreenContainer.vue' */
-
 export default {
-  components: {
-    /*  LoggedScreenContainer, */
-  },
-  data: () => ({}),
+  name: 'LoggedScreenInfo'
 }
 </script>
 

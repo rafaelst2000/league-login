@@ -5,12 +5,13 @@ import { getDatabase, ref, update, get, child } from "firebase/database";
 import { useAuthStore } from '../stores/auth'
 import { mapState } from 'pinia'
 
-import RiotInput from '../components/Input.vue'
+import RiotInput from '../components/RiotInput.vue'
 import SocialLogin from './SocialLogin.vue'
 import Loading from './Loading.vue'
 import ErrorMessage from './ErrorMessage.vue'
 
 export default {
+  name: 'FormCreateAccount',
   components: {
     RiotInput,
     SocialLogin,
@@ -18,19 +19,17 @@ export default {
     ErrorMessage,
   },
   emits: ['social-login'],
-  data() {
-    return {
-      loading: false,
-      newUser: {
-        user: '',
-        name: '',
-        email: '',
-        password: '',
-      },
-      errorMessage: '',
-      allUsers: []
-    }
-  },
+  data: () => ({
+    loading: false,
+    newUser: {
+      user: '',
+      name: '',
+      email: '',
+      password: '',
+    },
+    errorMessage: '',
+    allUsers: []
+  }),
   computed: {
     ...mapState(useAuthStore, ['getUser']),
     disableButton() {

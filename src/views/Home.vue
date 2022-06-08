@@ -3,6 +3,7 @@ import LoginImageContainer from '../components/LoginImageContainer.vue'
 import LoginContainer from '../components/LoginContainer.vue'
 
 export default {
+  name: 'Home',
   components: {
     LoginImageContainer,
     LoginContainer,

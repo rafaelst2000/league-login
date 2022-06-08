@@ -1,4 +1,8 @@
-<script></script>
+<script>
+export default {
+  name: 'Loading'
+}
+</script>
 
 <template>
   <div class="loader"></div>

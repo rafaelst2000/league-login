@@ -1,8 +1,7 @@
 <script>
 export default {
-  emits: {
-    click: null,
-  },
+  name: 'OutlinedButton',
+  emits: ['click'],
   props: {
     icon: {
       type: String,

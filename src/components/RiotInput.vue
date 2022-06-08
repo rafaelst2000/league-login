@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: 'RiotInput',
   emits: ['update:modelValue'],
   props: {
     name: {
