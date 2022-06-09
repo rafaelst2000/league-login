@@ -17,14 +17,48 @@ O projeto tem como finalidade colocar em prática os aprendizados dos cursos de 
   - **Firebase - Autenticação e banco de dados em tempo real**
   - **Vite - Bundler e Dev-server**
 
+
 ### **⚡Executando o Projeto**
 
-```
-git clone https://github.com/rafaelst2000/league-login.git
-cd league-login
-yarn
-yarn dev
-```
+### Pré-requisitos
+
+Para instalar as dependências necessárias do projeto, utilize o yarn. Para instalá-lo, execute o seguinte comando:
+
+  ```sh
+  npm install --global yarn
+  ```
+
+### Instalação
+
+Siga as etapas seguintes para instalar e executar o projeto:
+
+1. Clone o repositório
+
+   ```sh
+   git clone https://github.com/rafaelst2000/league-login.git
+   ```
+2. Instale as dependências do projeto:
+
+   ```sh
+   yarn
+   ```
+   
+3. Execute o projeto em servidor de desenvolvimento:
+
+   ```sh
+   yarn dev
+   ``` 
+   
+4. Enjoy! =D
+
+   ```sh
+   acesse localhost:3000 pelo seu navegador.
+   ``` 
+   <br>
+ 
+ <div align="center">
+  Made with 💚 by <a href="https://www.linkedin.com/in/rafaelst2000/" target="_blank">Rafael Trevisan</a>
+ </div>
 
 <!-- Badges -->
 
