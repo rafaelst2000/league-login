@@ -10,10 +10,10 @@ export default {
   mounted() {
     const auth = getAuth()
     onAuthStateChanged(auth, (user) => {
-     /*  if (user) {
+      if (user) {
         this.setUser({ ...user, isAuth: true })
         this.$router.push('/logged')
-      } */
+      }
     })
   },
 }

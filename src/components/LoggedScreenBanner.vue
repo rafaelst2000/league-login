@@ -9,17 +9,23 @@ export default {
   },
   data: () => ({
     isVideo: true,
+    showTooltip: false
   }),
   computed: {
     cameraIcon() {
       return this.isVideo ? 'fas fa-video' : 'fas fa-video-slash'
     },
   },
+  methods: {
+    logout() {
+
+    }
+  }
 }
 </script>
 
 <template>
-  <div class="logged-container-outside">
+  <div class="logged-container-outside" @click="showTooltip = false">
     <video autoplay muted loop id="myVideo" v-if="isVideo">
       <source src="../assets/valiant-riven.mp4" type="video/mp4" />
     </video>
@@ -30,7 +36,18 @@ export default {
           <game-alert />
         </div>
         <img src="../assets/league-of-legends.png" alt="" />
-        <outlined-button icon="fas fa-user" />
+        <outlined-button icon="fas fa-user" @click="showTooltip = !showTooltip">
+          <div v-if="showTooltip" class="user-tooltip" >
+            <div class="title">
+              <h3>adm rafin</h3>
+              <span>#Riven</span>
+            </div>
+            <div class="exit">
+              <h3 @click="logout">SAIR</h3 >
+            </div>
+            <p>Made by Rafael Trevisan</p>
+          </div>
+        </outlined-button>
       </header>
       <footer :class="isVideo ? 'footer-video' : 'footer-image'">
         <outlined-button class="icon-camera" :icon="cameraIcon" @click="isVideo = !isVideo" />
@@ -263,6 +280,49 @@ export default {
   }
   100% {
     opacity: 1;
+  }
+}
+
+
+.user-tooltip {
+  background: #211f1f;
+  padding: 20px 0;
+  width: 300px;
+  position: absolute;
+  right: 60px;
+  top: 0;
+  border-radius: 4px;
+  
+  .title, .exit {
+    padding: 0 20px 20px;
+    display: flex;
+    border-bottom: 2px solid #343434;
+    span {
+      color: #444343;
+      font-weight: bold;
+    }
+    h3 {
+      color: #b7b7b7;
+      font-size: 16px;
+    }
+  }
+
+  .exit {
+    margin-top: 20px;
+    border: none;
+    h3 {
+      transition: 0.3s;
+      cursor: pointer;
+      &:hover {
+        color: #444343;
+      }
+    }
+  }
+  p {
+    color: #14b4d8;
+    font-size: 12px;
+    text-align: right;
+    padding: 0 20px;
   }
 }
 </style>

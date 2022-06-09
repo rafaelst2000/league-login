@@ -6,15 +6,16 @@ export default {
     icon: {
       type: String,
       default: '',
-    },
+    }
   },
 }
 </script>
 
 <template>
-  <div class="button" @click="$emit('click')">
-    <button class="btn"><i :class="icon"></i></button>
-  </div>
+    <div class="button" @click.stop="$emit('click')">
+      <button class="btn"><i :class="icon"></i></button>
+      <slot></slot>
+    </div>
 </template>
 
 <style lang="scss" scoped>
