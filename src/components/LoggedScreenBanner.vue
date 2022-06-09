@@ -1,6 +1,10 @@
 <script>
 import GameAlert from './GameAlert.vue'
 import OutlinedButton from './OutlinedButton.vue'
+import { useAuthStore } from '../stores/auth'
+import { getAuth, signOut } from 'firebase/auth'
+import { mapActions } from 'pinia'
+
 export default {
   name: 'LoggedScreenBanner',
   components: {
@@ -17,8 +21,15 @@ export default {
     },
   },
   methods: {
+    ...mapActions(useAuthStore, ['resetState']),
     logout() {
-
+      const auth = getAuth();
+      signOut(auth).then(() => {
+        this.resetState()
+        this.$router.push('/')
+      }).catch((error) => {
+        console.log(error)
+      })
     }
   }
 }
