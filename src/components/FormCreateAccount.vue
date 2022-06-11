@@ -62,6 +62,7 @@ export default {
         .finally(() => this.loading = false)
     },
     async validateInfos() {
+      await this.getAllUsernames()
       const fullNameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/
       const isFullName = fullNameRegex.test(this.newUser.name)
       if(!isFullName) {
@@ -74,14 +75,17 @@ export default {
       }
       return true
     },
-    getAllUsernames() {
+    async getAllUsernames() {
       const db = getDatabase()
       const dbRef = ref(db)
-      get(child(dbRef, 'users')).then((snapshot ) => {
+      try {
+        const snapshot = await get(child(dbRef, 'users'))
         if(snapshot.exists()) {
           this.allUsers = Object.entries(snapshot.val()).map(user => user[1].username)
         }
-      })
+      } catch(error) {
+        console.log(error)
+      }
     }
   },
   watch: {
@@ -92,9 +96,6 @@ export default {
       }
     }
   },
-  mounted() {
-    this.getAllUsernames()
-  }
 }
 </script>
 
