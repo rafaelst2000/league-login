@@ -3,7 +3,7 @@ import GameAlert from './GameAlert.vue'
 import OutlinedButton from './OutlinedButton.vue'
 import { useAuthStore } from '../stores/auth'
 import { getAuth, signOut } from 'firebase/auth'
-import { mapActions } from 'pinia'
+import { mapActions, mapState } from 'pinia'
 
 export default {
   name: 'LoggedScreenBanner',
@@ -16,6 +16,7 @@ export default {
     showTooltip: false
   }),
   computed: {
+    ...mapState(useAuthStore, ['getUser']),
     cameraIcon() {
       return this.isVideo ? 'fas fa-video' : 'fas fa-video-slash'
     },
@@ -50,8 +51,8 @@ export default {
         <outlined-button icon="fas fa-user" @click="showTooltip = !showTooltip">
           <div v-if="showTooltip" class="user-tooltip" >
             <div class="title">
-              <h3>adm rafin</h3>
-              <span>#Riven</span>
+              <h3>{{ getUser.displayName }}</h3>
+              <span v-if="getUser.username">#{{ getUser.username }}</span>
             </div>
             <div class="exit">
               <h3 @click="logout">SAIR</h3 >
