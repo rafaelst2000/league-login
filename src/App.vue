@@ -2,6 +2,7 @@
 import { useAuthStore } from './stores/auth'
 import { mapActions } from 'pinia'
 import { onAuthStateChanged, getAuth } from 'firebase/auth'
+import { getDatabase, ref, get, child } from "firebase/database"
 
 export default {
   methods: {
@@ -10,10 +11,19 @@ export default {
   mounted() {
     const keepLogged = window.localStorage.getItem('keep-logged')
     const auth = getAuth()
+    const db = getDatabase()
+    const dbRef = ref(db)
     onAuthStateChanged(auth, (user) => {
       if (user && keepLogged) {
-        this.setUser ({ ...user, isAuth: true })
-        this.$router.push('/logged')
+        get(child(dbRef, `users/${user.uid}`)).then((snapshot) => {
+          if(snapshot.val()) {
+            this.setUser({ ...user, isAuth: true, ...snapshot.val() }) 
+          }
+          else {
+            this.setUser({ ...user, isAuth: true }) 
+          }
+          this.$router.push('/logged')
+        })
       }
     }) 
   },

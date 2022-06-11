@@ -36,6 +36,7 @@ export default {
   methods: {
     ...mapActions(useAuthStore, ['setUser']),
     loginGoogle() {
+      window.localStorage.removeItem('keep-logged')
       this.loading = true
       const auth = getAuth()
       const provider = new GoogleAuthProvider()
@@ -43,12 +44,8 @@ export default {
         .then((data) => {
           this.setUser({ ...data.user, isAuth: true })
           this.loading = false
-          if(this.keepLogged) {
-            window.localStorage.setItem('keep-logged', true)
-          } else {
-            window.localStorage.removeItem('keep-logged')
-            this.$router.push('/logged')
-          }
+          if(this.keepLogged) window.localStorage.setItem('keep-logged', true)
+          this.$router.push('/logged')
         })
         .catch((error) => console.log(error))
         .finally(() => this.loading = false)

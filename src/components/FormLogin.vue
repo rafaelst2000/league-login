@@ -42,10 +42,12 @@ export default {
     ...mapActions(useAuthStore, ['setUser']),
     async login() {
       if (this.disableButton) return
+      window.localStorage.removeItem('keep-logged')
       this.loading = true
-      await this.getAllUsers()
-      
+      const db = getDatabase()
+      const dbRef = ref(db)
       const auth = getAuth()
+      await this.getAllUsers()
       const email = this.getEmailbyUsername(this.username)
       if(!email) {
         this.error = true 
@@ -55,13 +57,11 @@ export default {
       signInWithEmailAndPassword(auth, email, this.password)
         .then((authUser) => {
           const user = authUser.user
-          this.setUser({ ...user, isAuth: true }) 
-          if(this.keepLogged) {
-            window.localStorage.setItem('keep-logged', true)
-          } else {
-            window.localStorage.removeItem('keep-logged')
+          get(child(dbRef, `users/${authUser.user.uid}`)).then((snapshot) => {
+            this.setUser({ ...user, isAuth: true, ...snapshot.val() }) 
+            if(this.keepLogged) window.localStorage.setItem('keep-logged', true)
             this.$router.push('/logged')
-          }
+          })
         })
         .catch((error) => {
           this.error = true
