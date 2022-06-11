@@ -50,6 +50,7 @@ export default {
           const updateData = { 
             username: this.newUser.user,
             displayName: this.newUser.name,
+            email: this.newUser.email
           }
           update(ref(db, `users/${uid}`), updateData)
         })

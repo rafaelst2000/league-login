@@ -24,7 +24,8 @@ export default {
     return {
       loading: false,
       error: false,
-      createAccount: false
+      createAccount: false,
+      keepLogged: false
     }
   },
   computed: {
@@ -34,12 +35,6 @@ export default {
   },
   methods: {
     ...mapActions(useAuthStore, ['setUser']),
-    login() {
-      if (this.disableButton) return
-      this.error = true
-      if (this.error) return
-      this.$router.push({ path: '/logged' })
-    },
     loginGoogle() {
       this.loading = true
       const auth = getAuth()
@@ -48,7 +43,12 @@ export default {
         .then((data) => {
           this.setUser({ ...data.user, isAuth: true })
           this.loading = false
-          this.$router.push('/logged')
+          if(this.keepLogged) {
+            window.localStorage.setItem('keep-logged', true)
+          } else {
+            window.localStorage.removeItem('keep-logged')
+            this.$router.push('/logged')
+          }
         })
         .catch((error) => console.log(error))
         .finally(() => this.loading = false)
@@ -74,7 +74,7 @@ export default {
       <img src="../assets/riot-games.png" alt="Riot Games Logo" />
     </div>
 
-    <form-login v-if="!loading && !createAccount" @social-login="socialLogin($event)" @loading="loading = $event"/>
+    <form-login v-if="!loading && !createAccount" @social-login="socialLogin($event)" @loading="loading = $event" v-model:keepLogged="keepLogged"/>
     <form-create-account v-else-if="!loading && createAccount" @loading="loading = $event"/>
     <loading v-else />
 

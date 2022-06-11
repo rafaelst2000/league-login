@@ -1,6 +1,8 @@
 <script>
 import { useAuthStore } from '../stores/auth'
 import { mapActions } from 'pinia'
+import { getDatabase, ref, get, child } from "firebase/database";
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 import RiotInput from '../components/RiotInput.vue'
 import SocialLogin from './SocialLogin.vue'
@@ -18,25 +20,73 @@ export default {
     FormCreateAccount,
   },
   emits: ['social-login'],
+  props: {
+    keepLogged: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: () => ({
     error: false,
     loading: false,
-    user: '',
+    username: '',
     password: '',
+    allUsers: []
   }),
   computed: {
     disableButton() {
-      return !this.user || !this.password
+      return !this.username || this.password.length < 6
     },
   },
   methods: {
     ...mapActions(useAuthStore, ['setUser']),
-    login() {
+    async login() {
       if (this.disableButton) return
-      this.error = true
-      if (this.error) return
-      this.$router.push({ path: '/logged' })
+      this.loading = true
+      await this.getAllUsers()
+      
+      const auth = getAuth()
+      const email = this.getEmailbyUsername(this.username)
+      if(!email) {
+        this.error = true 
+        this.loading = false
+        return
+      }
+      signInWithEmailAndPassword(auth, email, this.password)
+        .then((authUser) => {
+          const user = authUser.user
+          this.setUser({ ...user, isAuth: true }) 
+          if(this.keepLogged) {
+            window.localStorage.setItem('keep-logged', true)
+          } else {
+            window.localStorage.removeItem('keep-logged')
+            this.$router.push('/logged')
+          }
+        })
+        .catch((error) => {
+          this.error = true
+        })
+        .finally(() => this.loading = false)
     },
+    async getAllUsers() {
+      const db = getDatabase()
+      const dbRef = ref(db)
+      try {
+        const snapshot = await get(child(dbRef, 'users'))
+        if(snapshot.exists()) {
+          this.allUsers = Object.entries(snapshot.val()).map(user => {
+            return  { username: user[1].username, email: user[1].email }
+          })
+        }
+      } catch(error) {
+        console.log(error)
+      }
+    },
+    getEmailbyUsername(username) {
+      const foundUser = this.allUsers.find(user => user.username === username)
+      if(foundUser && foundUser.email) return foundUser.email
+      return ''
+    }
   },
   watch: {
     user() {
@@ -54,15 +104,16 @@ export default {
     <h1 v-if="!error">Fazer login</h1>
     <error-message v-else text="Suas credenciais de login não coincidem com uma conta em nosso sistema."/>
 
-    <riot-input v-model="user" name="login" label="NOME DE USUÁRIO" type="text" :error="error" />
+    <riot-input v-model="username" name="login" label="NOME DE USUÁRIO" type="text" :error="error" />
     <riot-input v-model="password" name="password" label="SENHA" type="password" :error="error" />
 
     <social-login  @click="$emit('social-login', $event)" />
 
     <div class="checkbox">
-      <input type="checkbox" class="checkbox-color" id="check" name="check" value="stay" />
+      <input v-model="keepLogged" type="checkbox" class="checkbox-color" id="check" name="check" value="stay" />
       <label for="check">Manter login</label>
     </div>
+
     <div class="button" @click.prevent="login">
       <button type="submit" class="btn" :class="disableButton ? 'btn-disabled' : ''"><i class="fas fa-arrow-right"></i></button>
     </div>

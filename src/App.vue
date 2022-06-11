@@ -8,13 +8,14 @@ export default {
     ...mapActions(useAuthStore, ['setUser']),
   },
   mounted() {
+    const keepLogged = window.localStorage.getItem('keep-logged')
     const auth = getAuth()
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        this.setUser({ ...user, isAuth: true })
+      if (user && keepLogged) {
+        this.setUser ({ ...user, isAuth: true })
         this.$router.push('/logged')
       }
-    })
+    }) 
   },
 }
 </script>
