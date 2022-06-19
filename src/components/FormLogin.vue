@@ -20,15 +20,10 @@ export default {
     FormCreateAccount,
   },
   emits: ['social-login'],
-  props: {
-    keepLogged: {
-      type: Boolean,
-      default: false
-    }
-  },
   data: () => ({
     error: false,
     loading: false,
+    keepLogged: false,
     username: '',
     password: '',
     allUsers: []
@@ -107,7 +102,7 @@ export default {
     <riot-input v-model="username" name="login" label="NOME DE USUÁRIO" type="text" :error="error" />
     <riot-input v-model="password" name="password" label="SENHA" type="password" :error="error" />
 
-    <social-login  @click="$emit('social-login', $event)" />
+    <social-login  @click="$emit('social-login', { socialNetwork: $event, keepLogged })" />
 
     <div class="checkbox">
       <input v-model="keepLogged" type="checkbox" class="checkbox-color" id="check" name="check" value="stay" />

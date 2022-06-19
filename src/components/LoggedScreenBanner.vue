@@ -27,6 +27,7 @@ export default {
       const auth = getAuth();
       signOut(auth).then(() => {
         this.resetState()
+        window.localStorage.removeItem('keep-logged')
         this.$router.push('/')
       }).catch((error) => {
         console.log(error)
