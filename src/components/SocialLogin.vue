@@ -42,7 +42,7 @@ export default {
   & .facebook {
     color: #fff;
     background-color: #1877f2;
-    cursor: pointer;
+    cursor: not-allowed;
     transition: 0.3s;
     &:hover {
       background-color: #0966de;
@@ -69,7 +69,7 @@ export default {
     background-color: #000;
     transition: 0.3s;
     &:hover {
-      cursor: pointer;
+      cursor: not-allowed;
     }
   }
 }

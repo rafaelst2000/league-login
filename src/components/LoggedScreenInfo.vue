@@ -35,7 +35,7 @@ export default {
 <style lang="scss" scoped>
 .logged-info-container {
   position: relative;
-  width: 1280px;
+  max-width: 1280px;
   height: 680px;
   background: #141212;
   display: grid;

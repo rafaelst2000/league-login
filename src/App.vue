@@ -54,6 +54,7 @@ body {
 #app {
   width: 100vw;
   height: 100vh;
+  padding: 0 20px;
   display: flex;
   justify-content: center;
   align-items: center;

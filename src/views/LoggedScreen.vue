@@ -22,8 +22,8 @@ export default {
 <style lang="scss" scoped>
 .logged-container {
   height: 680px;
-  overflow: auto;
-  width: 1288px;
+  overflow-y: auto;
+  max-width: 1288px
 }
 
 ::-webkit-scrollbar {

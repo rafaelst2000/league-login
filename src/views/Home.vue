@@ -23,6 +23,6 @@ export default {
   display: grid;
   grid-template-columns: 370px 1fr;
   width: 1280px;
-  height: 680px;
+  height: 685px;
 }
 </style>

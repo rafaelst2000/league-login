@@ -101,7 +101,7 @@ export default {
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 1280px;
+  width: 100%;
   height: 680px;
   object-fit: cover;
   animation: fadeIn 1.5s;
@@ -109,7 +109,7 @@ export default {
 
 .logged-container-outside {
   position: relative;
-  width: 1280px;
+  max-width: 1280px;
   height: 680px;
 }
 
@@ -123,7 +123,8 @@ export default {
 
 .logged-container {
   position: absolute;
-  width: 1280px;
+  max-width: 1280px;
+  width: 100%;
   height: 680px;
 
   & header {
