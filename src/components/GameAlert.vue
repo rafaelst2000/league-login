@@ -7,8 +7,8 @@ export default {
 }
 </script>
 <template>
-  <span class="game-alert-out">
-    <div class="game-alert" @mouseenter="showTooltip = true" @mousedown="showTooltip = false"></div>
+  <div class="game-alert-out">
+    <span class="game-alert" @mouseenter="showTooltip = true" @mousedown="showTooltip = false"></span>
     <div class="game-alert-tooltip" v-if="showTooltip" @mouseenter="showTooltip = true" @mouseleave="showTooltip = false">
       <div class="item">
         <h3>Skins desabilitadas</h3>
@@ -23,12 +23,13 @@ export default {
 
       <h6>MAIS DETALHES</h6>
     </div>
-  </span>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 .game-alert-out {
   position: relative;
+  display: block;
 }
 .game-alert {
   width: 34px;
@@ -38,6 +39,7 @@ export default {
   position: relative;
   border-radius: 4px;
   transition: 0.3s;
+  display: inline-block;
   &::after {
     content: '!';
     font-size: 32px;

@@ -110,7 +110,7 @@ export default {
     </div>
 
     <div class="button" @click.prevent="login">
-      <button type="submit" class="btn" :class="disableButton ? 'btn-disabled' : ''"><i class="fas fa-arrow-right"></i></button>
+      <button aria-label="Entrar agora" type="submit" class="btn" :class="disableButton ? 'btn-disabled' : ''"><i class="fas fa-arrow-right"></i></button>
     </div>
   </form>
 

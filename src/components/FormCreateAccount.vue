@@ -117,7 +117,7 @@ export default {
     <social-login @click="$emit('social-login', { socialNetwork: $event, keepLogged: false })" />
 
     <div class="button" @click.prevent="createAccount">
-      <button type="submit" class="btn" :class="disableButton ? 'btn-disabled' : ''"><i class="fas fa-arrow-right"></i></button>
+      <button aria-label="Criar conta" type="submit" class="btn" :class="disableButton ? 'btn-disabled' : ''"><i class="fas fa-arrow-right"></i></button>
     </div>
   </form>
 

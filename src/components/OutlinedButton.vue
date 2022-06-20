@@ -13,7 +13,7 @@ export default {
 
 <template>
     <div class="button" @click.stop="$emit('click')">
-      <button class="btn"><i :class="icon"></i></button>
+      <button :aria-label="`icone de ${icon}`" class="btn"><i :class="icon"></i></button>
       <slot></slot>
     </div>
 </template>

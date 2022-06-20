@@ -36,7 +36,7 @@ export default {
 
 <template>
   <div class="input-container input-value" :class="error ? 'error' : ''">
-    <input v-model="localValue" :type="type" :name="name" required />
+    <input v-model="localValue" :type="type" :name="name" required :id="name"/>
     <label :for="name">{{ label }}</label>
   </div>
 </template>
