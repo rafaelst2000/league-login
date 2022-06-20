@@ -27,6 +27,7 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   padding: 30px;
 }
