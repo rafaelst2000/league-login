@@ -75,7 +75,7 @@ export default {
     </div>
 
     <form-login v-if="!loading && !createAccount" @social-login="socialLogin($event)" @loading="loading = $event"/>
-    <form-create-account v-else-if="!loading && createAccount" @loading="loading = $event"/>
+    <form-create-account v-else-if="!loading && createAccount" @social-login="socialLogin($event)" @loading="loading = $event"/>
     <loading v-else />
 
     <div class="footer-links">

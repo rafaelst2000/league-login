@@ -3,7 +3,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { getDatabase, ref, update, get, child } from "firebase/database";
 
 import { useAuthStore } from '../stores/auth'
-import { mapState } from 'pinia'
+import { mapState, mapActions } from 'pinia'
 
 import RiotInput from '../components/RiotInput.vue'
 import SocialLogin from './SocialLogin.vue'
@@ -37,6 +37,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(useAuthStore, ['setUser']),
     async createAccount(){
       const isValid = await this.validateInfos()
       if(!isValid) return
@@ -52,7 +53,10 @@ export default {
             displayName: this.newUser.name,
             email: this.newUser.email
           }
-          update(ref(db, `users/${uid}`), updateData)
+          update(ref(db, `users/${uid}`), updateData).then(() => {
+            this.setUser({ isAuth: true, ...newUser.user, ...updateData })
+            this.$router.push('/logged')
+          })
         })
         .catch((error) => {
           const { message } = error
@@ -66,6 +70,7 @@ export default {
       await this.getAllUsernames()
       const fullNameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/
       const isFullName = fullNameRegex.test(this.newUser.name)
+      console.log('isFullName', isFullName)
       if(!isFullName) {
         this.errorMessage = 'Digite seu nome completo.'
         return false
@@ -110,7 +115,7 @@ export default {
     <riot-input v-model="newUser.email" name="email" label="E-MAIL" type="text" :error="!!errorMessage" />
     <riot-input v-model="newUser.password" name="password" label="SENHA" type="password" :error="!!errorMessage" />
 
-    <social-login @click="$emit('social-login', $event)" />
+    <social-login @click="$emit('social-login', { socialNetwork: $event, keepLogged: false })" />
 
     <div class="button" @click.prevent="createAccount">
       <button type="submit" class="btn" :class="disableButton ? 'btn-disabled' : ''"><i class="fas fa-arrow-right"></i></button>
