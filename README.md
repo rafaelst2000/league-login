@@ -1,5 +1,9 @@
 <div align="center">
 
+<img src="./src/assets/lol-auth-gif.gif"/>
+  
+&nbsp;
+
 ![Node_Badge][node_version_badge] ![Npm_Badge][yarn_version_badge] ![vue_Badge][vue_badge] ![NodeJS_Badge][server_firebase_badge] ![Pinia_Badge][pinia_badge] ![Vite_Badge][vite_badge]
 
 </div>
@@ -57,7 +61,7 @@ Siga as etapas seguintes para instalar e executar o projeto:
    <br>
  
  <div align="center">
-  Made with 💚 by <a href="https://www.linkedin.com/in/rafaelst2000/" target="_blank">Rafael Trevisan</a>
+  Made by <a href="https://www.linkedin.com/in/rafaelst2000/" target="_blank">Rafael Trevisan</a>
  </div>
 
 <!-- Badges -->
