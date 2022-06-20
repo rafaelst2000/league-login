@@ -3,12 +3,17 @@ import { useAuthStore } from './stores/auth'
 import { mapActions } from 'pinia'
 import { onAuthStateChanged, getAuth } from 'firebase/auth'
 import { getDatabase, ref, get, child } from "firebase/database"
+import WildRift from './views/WildRift.vue'
 
 export default {
-  methods: {
-    ...mapActions(useAuthStore, ['setUser']),
+  components: { 
+    WildRift
   },
+  data: () => ({
+    width: document.documentElement.clientWidth
+  }),
   mounted() {
+    window.addEventListener('resize', this.getDimensions);
     const keepLogged = window.localStorage.getItem('keep-logged')
     const auth = getAuth()
     const db = getDatabase()
@@ -27,11 +32,21 @@ export default {
       }
     }) 
   },
+  unmounted() {
+    window.removeEventListener('resize', this.getDimensions);
+  },
+  methods: {
+    ...mapActions(useAuthStore, ['setUser']),
+    getDimensions() {
+      this.width = document.documentElement.clientWidth;
+    }
+  },
 }
 </script>
 
 <template>
-  <router-view />
+  <wild-rift v-if="width < 1200" />
+  <router-view v-else/>
 </template>
 
 <style>
