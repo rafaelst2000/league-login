@@ -4,7 +4,7 @@
 <template>
   <div class="wild-rift">
     <h1>Hey, acho que você deveria tentar o</h1>
-    <img src="../assets/wild-rift.png" alt="Wild Rift logo">
+    <a href="https://wildrift.leagueoflegends.com/pt-br/" target="_blank"><img src="../assets/wild-rift.png" alt="Wild Rift logo"></a>
     <h1>=D</h1>
   </div>
 </template>
