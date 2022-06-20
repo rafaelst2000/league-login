@@ -70,7 +70,6 @@ export default {
       await this.getAllUsernames()
       const fullNameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/
       const isFullName = fullNameRegex.test(this.newUser.name)
-      console.log('isFullName', isFullName)
       if(!isFullName) {
         this.errorMessage = 'Digite seu nome completo.'
         return false
