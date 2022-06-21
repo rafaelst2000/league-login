@@ -21,8 +21,13 @@ O projeto tem como finalidade colocar em prática os aprendizados dos cursos de 
   - **Firebase - Autenticação e banco de dados em tempo real**
   - **Vite - Bundler e Dev-server**
 
+## **📩 Commits**
 
-### **⚡Executando o Projeto**
+  - **✨ - Adição de nova feature**
+  - **🐛 - Resolução de bugs / correções**
+  - **♻️ - Mudanças de código / refatorações**
+
+## **⚡Executando o Projeto**
 
 ### Pré-requisitos
 
