@@ -27,7 +27,15 @@ O projeto tem como finalidade colocar em prática os aprendizados dos cursos de 
   - **🐛 - Resolução de bugs / correções**
   - **♻️ - Mudanças de código / refatorações**
 
-## **⚡Executando o Projeto**
+## **⚡Executando o projeto em ambiente de Produção**
+
+   ```sh
+   acesse https://rafaelst2000-league-login.netlify.app/ pelo seu navegador.
+   ``` 
+
+## **⚡Executando o projeto em ambiente de Desenvolvimento**
+
+ 
 
 ### Pré-requisitos
 
